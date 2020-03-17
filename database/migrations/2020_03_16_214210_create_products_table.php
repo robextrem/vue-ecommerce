@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('slug');
             $table->longText('description');
             $table->double('price');
+            $table->tinyInteger('status');
             $table->timestamps();
         });
     }

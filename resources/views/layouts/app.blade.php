@@ -9,7 +9,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -29,37 +29,34 @@
             </div>
             @auth
             <div class="navbar-start">
-                <a class="navbar-item">
+                <a class="navbar-item" href="/admin/products">
                     Products
                 </a>
-                <a class="navbar-item">
+                <a class="navbar-item" href="/admin/users">
                     Users
                 </a>
             </div>
             @endauth
             <div class="navbar-end">
-                <div class="navbar-item">
                     @guest
-                    <div class="buttons">
-                        <a class="button is-primary" href="{{ route('register') }}">
-                            <strong>{{ __('Register') }}</strong>
-                        </a>
-                        <a class="button is-light" href="{{ route('login') }}">
-                            {{ __('Login') }}
-                        </a>
+                    <div class="navbar-item">
+                        <div class="buttons">
+                            <a class="button is-primary" href="{{ route('register') }}">
+                                <strong>{{ __('Register') }}</strong>
+                            </a>
+                            <a class="button is-light" href="{{ route('login') }}">
+                                {{ __('Login') }}
+                            </a>
+                        </div>
                     </div>
                     @else
-                        <a class="navbar-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
+                    <a class="navbar-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                    </form>
                     @endguest
-                    </div>
-                </div>
             </div>
         </nav>
     </header>
