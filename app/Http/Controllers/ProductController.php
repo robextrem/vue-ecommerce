@@ -20,25 +20,43 @@ class ProductController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $products = Product::where("status", "<>", 2)
-                ->paginate(100);
-        $products->setPath(Route::currentRouteAction());
+                ->paginate(5);
+        $products->setPath("/admin/products");
         return view('products/index', array("products" => $products));
+    }
+
+    public function admin()
+    {
+        return view('admin');
+    }
+
+    public function list()
+    {
+        return response()->json(Product::all());
     }
 
     public function _new()
     {
-        return view('products/add');
+        
+        $product = new Product();
+        $product->name="New product";
+        $product->status = 0; // draft
+        $product->save();
+        return redirect("/admin/products/{$product->id}");
     }
 
     public function _edit(Request $request, $id)
     {
         $product = Product::find($id);
-        return view('products/edit',["product"=>$product]);
+        $media = $product->getFirstMediaUrl('images');
+
+        return view('products/edit',["product"=>$product, "media"=>$media]);
     }
 
+    /*
     public function add(Request $request){
         $data = array();
         $data["name"] = $request->input("name");
@@ -64,7 +82,7 @@ class ProductController extends Controller
         $product->save();
 
         return redirect("admin/products");
-    }
+    }*/
 
     public function edit(Request $request){
         $data = array();
@@ -80,14 +98,17 @@ class ProductController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('admin/products/new?err=1')->withErrors($validator)->withInput();
+            return redirect("admin/products/{$id}")->withErrors($validator)->withInput();
         }
 
         $product = Product::find($id);
         $product->name=$data["name"];
         $product->description=$data["description"];
+        $product->slug=self::slugname($product->name, $product->id);
         $product->price=$data["price"];
+        $product->status=$request->input("status");
         $product->save();
+
 
         return redirect("admin/products/{$id}");
     }
@@ -95,9 +116,20 @@ class ProductController extends Controller
     public function delete(Request $request)
     {
         $id=$request->input("id");
-        $user = User::find($id);
-        $user->delete();
-        return response()->json($user);
+        $product = Product::find($id);
+        $product->status=2;
+        $product->save();
+        return response()->json($product);
+    }
+
+    public static function slugname($name, $id=null, $i=0){
+        $slugname=Str::slug($name,"-");
+        $slugname_iteration = $slugname.(($i==0)?"":"-$i");
+        $slug_exists=Product::where("slug",$slugname_iteration)->where("id","<>",$id)->count();
+        if($slug_exists>0){
+            $slugname_iteration=self::slugname($slugname, $id, $i+1);
+        }
+        return $slugname_iteration ;
     }
 
 }

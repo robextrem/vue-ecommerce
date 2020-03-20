@@ -7,3 +7,51 @@
 html,body{
     background:#FAFAFA;
 }
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+main {
+    flex: 1 0 auto;
+}
+      
+#grid-products{
+    margin-top:20px;
+}
+
+#file-uploader{
+    min-height: 300px;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+    background: #f5f5f5;
+    margin:0 0 15px 0;
+    padding:10px;
+}
+
+.image-preview{
+    position:relative;
+    img{
+        height:220px;
+    }
+    a.delete{
+        position:absolute;
+        top:5px;
+        right:5px;
+        display:inline-flex;
+    }
+}
+
+#product{
+    h1.title{
+        font-weight:bold;
+    }
+    .price{
+        margin:25px 0;
+    }
+    .description{
+        margin:15px 0 50px;
+    }
+}

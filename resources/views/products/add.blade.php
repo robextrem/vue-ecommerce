@@ -8,6 +8,21 @@
         <label for="name">Name</label>
         <input id="name" type="text" class="input" name="name" value="{{old('name')}}" required>
     </div>
+    <label for="filepond">Images</label>
+    <template>
+        <div id="filepond">
+            <file-pond
+            name="file"
+            ref="pond"
+            label-idle="Drop files here..."
+            v-bind:allow-multiple="true"
+            v-bind:data-max-files="10"
+            accepted-file-types="image/jpeg, image/png"
+            server="/api"
+            v-bind:files="myFiles"
+            v-on:init="handleFilePondInit"/>
+        </div>
+    </template>
     <div class="field">
         <label for="description">Description</label>
         <textarea class="textarea" id="description" name="description">{{old('description')}}</textarea>

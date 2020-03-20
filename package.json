@@ -25,7 +25,6 @@
     },
     "dependencies": {
         "bulma": "^0.8.0",
-        "dropify": "^0.2.2",
         "gulp": "^4.0.2"
     }
 }

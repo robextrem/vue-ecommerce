@@ -21,11 +21,6 @@
                 <a class="navbar-item" href="{{ url('/') }}">
                 <img src="https://storage.googleapis.com/wfhq_flatbelly/img/logo-pure.png" alt="{{ config('app.name', 'Laravel') }}">
                 </a>
-                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                </a>
             </div>
             @auth
             <div class="navbar-start">
@@ -60,10 +55,18 @@
             </div>
         </nav>
     </header>
-    <div id="app">
-        <main class="py-4">
-                @yield('content')
-        </main>
+    <main>
+        <div id="app">
+        @yield('content')
+        </div>
+    </main>
+    <footer class="footer">
+    <div class="content has-text-centered">
+        <p>
+        {{@date("Y")}} - Build with <i class="fa fa-heart"></i> by
+        <a href="#" target="_blank">@robextrem</a>
+        </p>
     </div>
+    </footer>
 </body>
 </html>

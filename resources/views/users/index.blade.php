@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <section class="section">
-  <a href="/admin/users/new" class="button is-primary is-pulled-right">Add user</a>
+  <a href="/admin/users/new" class="button is-link is-pulled-right">Add user</a>
   <h1 class="is-size-4">Users list</h1>
   <br/>
   @if(count($users)>0)
@@ -21,6 +21,6 @@
   @else
   <span>Por ahora no hay usuarios registrados</span>
   @endif
-  <a href="/admin/users/new" class="button is-primary is-pulled-right">Add user</a>
+  <a href="/admin/users/new" class="button is-link is-pulled-right">Add user</a>
 </section>
 @endsection

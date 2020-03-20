@@ -18,7 +18,7 @@
         </span>
     @enderror
     <div class="clearfix"></div>
-    <button class="submit button is-primary">Save</button>
+    <button class="submit button is-link">Save user</button>
     </form>
 </section>
 @endsection

@@ -13,7 +13,7 @@
         <label for="email">Email</label>
         <input id="email" type="email" class="input" name="email" value="{{$user->email}}" required  autocomplete="off">
     </div>
-    <button class="submit button is-primary">Save</button>
+    <button class="submit button is-link">Save user</button>
     </form>
 </section>
 @endsection
