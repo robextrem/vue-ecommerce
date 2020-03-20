@@ -18,8 +18,18 @@ main {
     flex: 1 0 auto;
 }
       
+.go-back-link{
+    display: block;
+    clear: both;
+}
+
 #grid-products{
     margin-top:20px;
+    .card{
+        .image{
+            cursor:pointer;
+        }
+    }
 }
 
 #file-uploader{

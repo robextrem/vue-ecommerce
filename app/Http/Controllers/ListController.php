@@ -28,7 +28,7 @@ class ListController extends Controller
             $p->id=$product->id;
             $p->name=$product->name;
             $p->price=$product->price;
-            $p->slug=$product->slugn;
+            $p->slug=$product->slug;
             $p->image=$product->getFirstMediaUrl('images');
             array_push($result, $p);
         }
@@ -36,14 +36,14 @@ class ListController extends Controller
         return response()->json($result);
     }
 
-    public function product(Request $request, $id)
+    public function product(Request $request, $slug)
     {
-        $product = Product::where("status", 1)->where("id",$id)->first();
+        $product = Product::where("status", 1)->where("slug",$slug)->first();
         $p= new \stdClass();
         $p->id=$product->id;
         $p->name=$product->name;
         $p->price=$product->price;
-        $p->slug=$product->slugn;
+        $p->slug=$product->slug;
         $p->image=$product->getFirstMediaUrl('images');
 
         return response()->json($p);

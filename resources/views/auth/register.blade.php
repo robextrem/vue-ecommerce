@@ -6,9 +6,11 @@
         <section class="section">
             <div class="columns justify-content-center">
                 <div class="column is-half is-offset-one-quarter">
+                    <div class="has-text-centered">
+                            <img src="https://storage.googleapis.com/wfhq_flatbelly/img/logo-pure.png">
+                    </div>
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-
                         <div class="field">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
                                 <input id="name" type="text" class="input @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -52,6 +54,8 @@
                             </div>
                         </div>
                     </form>
+                    <br/>
+                        <a href="/login">Already have an account?</a>
                 </div>
             </div>
         </div>

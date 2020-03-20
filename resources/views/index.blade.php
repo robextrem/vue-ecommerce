@@ -15,7 +15,7 @@
 </section>
 <section class="section">
     <div id="grid-products">
-        <grid></grid>
+        <router-view></router-view>
     </div>
 </section>
 @endsection

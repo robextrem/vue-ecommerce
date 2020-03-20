@@ -40,7 +40,6 @@ class ProductController extends Controller
 
     public function _new()
     {
-        
         $product = new Product();
         $product->name="New product";
         $product->status = 0; // draft

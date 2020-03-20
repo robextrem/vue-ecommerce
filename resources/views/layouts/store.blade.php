@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    @include('metas')
     <!-- Scripts -->
     <script src="{{ asset('js/store.js') }}" defer></script>
     <!-- Fonts -->
@@ -29,8 +29,10 @@
                                 <span>Admin</span>
                             </a>
                             <a class="button is-warning" href="/cart">
+                                <span class="icon is-small">
                                 <i class="fa fa-shopping-cart"></i>
-                                <span>1</span>
+                                </span>
+                                <span>{{\Cart::count()}}</span>
                             </a>
                         </div>
                     </div>                  

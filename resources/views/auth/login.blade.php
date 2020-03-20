@@ -4,6 +4,9 @@
     <section class="section">
         <div class="columns justify-content-center">
             <div class="column is-half is-offset-one-quarter">
+                        <div class="has-text-centered">
+                            <img src="https://storage.googleapis.com/wfhq_flatbelly/img/logo-pure.png">
+                        </div>
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                             <div class="field">
@@ -42,15 +45,18 @@
                                     <button type="submit" class="button is-primary">
                                         {{ __('Login') }}
                                     </button>
-
+                                    <!--
                                     @if (Route::has('password.request'))
                                         <a class="button is-white is-pulled-right" href="{{ route('password.request') }}">
                                             {{ __('Forgot Your Password?') }}
                                         </a>
                                     @endif
+-->
                                 </div>
                             </div>
                         </form>
+                        <br/>
+                        <a href="/register">Create a new account</a>
                     </div>
         </div>
     </section>

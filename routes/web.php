@@ -16,6 +16,14 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index');
 
+Route::get('/product/{slug}', 'HomeController@product');
+Route::get('/cart/', 'CartController@index');
+Route::post('/cart/add', 'CartController@add_to_cart');
+Route::get('/cart/remove/{row}', 'CartController@remove_from_cart');
+Route::get('/checkout', function () {
+    return view('checkout');
+});
+
 Route::get('/admin', 'ProductController@admin');
 Route::get('/admin/products', 'ProductController@index');
 Route::get('/admin/products/new', 'ProductController@_new');

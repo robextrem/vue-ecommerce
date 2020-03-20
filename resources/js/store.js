@@ -6,6 +6,8 @@
 
 
 window.Vue = require('vue');
+import VueRouter from 'vue-router';
+Vue.use(VueRouter)
 
 window.axios = require('axios').default;
 window.axios.defaults.headers.common = {
@@ -13,11 +15,27 @@ window.axios.defaults.headers.common = {
     'X-CSRF-TOKEN' : document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 };
 
+import GridProduct from './components/GridProducts.vue';
+import Product from './components/Product.vue';
 
-Vue.component('grid', require('./components/GridProducts.vue').default);
 
+//Vue.component('grid', require('./components/GridProducts.vue').default);
 
-const v = new Vue({
-    el: '#grid-products'
+const router = new VueRouter({
+    mode: 'history',
+    routes: [
+        {
+            path: '/',
+            name: "home",
+            component: GridProduct
+        },
+        {
+            path: '/product/:slug',
+            name: "product",
+            component: Product,
+        },
+    ],
 });
+
+const app = new Vue({ router }).$mount('#grid-products')
 

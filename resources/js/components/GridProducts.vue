@@ -1,45 +1,32 @@
 <template>
     <article>
-        <div class="columns is-multiline is-mobile" v-if="!isproduct">
-            <div class="column is-3" v-for="result in results">
-                    <div class="card" v-on:click="getProduct(result.id, $event)" :data-slug="result.slug">
-                        <div class="card-image">
-                            <figure class="image is-4by3">
-                            <img :src="result.image" :alt="result.name">
-                            </figure>
+        <div class="container">
+            <div class="columns is-multiline is-mobile">
+                <div class="column is-3" v-for="result in results">
+                        <div class="card" :data-slug="result.slug">
+                            <div class="card-image" @click="$router.push('product/'+result.slug)">
+                                <figure class="image">
+                                <img :src="result.image" :alt="result.name">
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <div class="media">
+                                <div class="media-content">
+                                    <p class="title is-4">{{result.name}}</p>
+                                    <p class="subtitle is-6">${{number_format(result.price,2,".",",")}} {{currency}}</p>
+                                </div>
+                                </div>
+                                <div class="content">
+                                    <button class="button is-primary add-to-cart-btn" v-on:click="addToCart(result.id, $event)">Add to cart</button>
+                                    <button class="button is-primary is-outlined" @click="$router.push('product/'+result.slug)">
+                                        <span>Details</span> 
+                                        <span class="icon is-small">
+                                            <i class="fa fa-chevron-right"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-content">
-                            <div class="media">
-                            <div class="media-content">
-                                <p class="title is-4">{{result.name}}</p>
-                                <p class="subtitle is-6">${{number_format(result.price,2,".",",")}} {{currency}}</p>
-                            </div>
-                            </div>
-                            <div class="content">
-                                <button class="button is-primary add-to-cart-btn" v-on:click="addToCart(product.id, $event)">Add to cart</button>
-                                <button class="button is-primary is-outlined">
-                                    <span>Details</span> 
-                                    <span class="icon is-small">
-                                        <i class="fa fa-chevron-right"></i>
-                                    </span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-        </div>
-        <div id="product" v-if="isproduct">
-            <div class="container">
-                <div class="columns">
-                    <div class="column is-4">
-                        <img :src="product.image" alt="Placeholder image">
-                    </div>
-                    <div class="column is-7 is-offset-1 has-text-left">
-                        <h1 class="is-size-2 title">{{product.name}}</h1>
-                        <h2 class="is-size-5 price">${{number_format(product.price,2,".",",")}} {{currency}}</h2>
-                        <p class="description">{{product.description}}</p>
-                        <button class="button is-primary is-medium add-to-cart-btn" v-on:click="addToCart(product.id, $event)">Add to cart</button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -57,7 +44,7 @@
                 results: [],
                 isproduct: false,
                 product:{},
-                currency: "MXN"
+                currency: ""
             };
         },
         methods:{
@@ -73,7 +60,24 @@
             },
             addToCart(product_id, event){
                 event.stopPropagation();
-                alert("agregado a carrito");
+                let currentObj = this;
+                const config = {
+                        headers: {
+                            'content-type': 'multipart/form-data',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                        }
+                }
+
+                let formData = new FormData();
+                formData.append('id', product_id);
+
+                axios.post('/cart/add/', formData, config)
+                    .then(function (response) {
+                        window.location.href="/cart"
+                    })
+                    .catch(function (error) {
+                    currentObj.output = error;
+                });
             },
             getProduct(product_id,event){
                 event.stopPropagation();
