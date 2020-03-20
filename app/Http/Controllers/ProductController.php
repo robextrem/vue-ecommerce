@@ -42,6 +42,9 @@ class ProductController extends Controller
     {
         $product = new Product();
         $product->name="New product";
+        $product->description="";
+        $product->slug="";
+        $product->price = 0;
         $product->status = 0; // draft
         $product->save();
         return redirect("/admin/products/{$product->id}");
