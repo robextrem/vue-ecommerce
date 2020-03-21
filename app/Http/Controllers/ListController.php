@@ -29,6 +29,7 @@ class ListController extends Controller
             $p->name=$product->name;
             $p->price=$product->price;
             $p->slug=$product->slug;
+            $p->description=$product->description;
             $p->image=$product->getFirstMediaUrl('images');
             array_push($result, $p);
         }
@@ -43,6 +44,7 @@ class ListController extends Controller
         $p->id=$product->id;
         $p->name=$product->name;
         $p->price=$product->price;
+        $p->description=$product->description;
         $p->slug=$product->slug;
         $p->image=$product->getFirstMediaUrl('images');
 
