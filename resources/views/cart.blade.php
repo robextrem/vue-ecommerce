@@ -12,7 +12,7 @@
     @endforeach
     </table>
     <div class=" is-pulled-right">
-    <h1 class="has-text-right is-size-4">Total ${{\Cart::total()}}</h1><br/>
+    <h1 class="has-text-right is-size-4">Total ${{\Cart::priceTotal()}}</h1><br/>
     <a class="is-medium button" href="/"><span>Continue shopping</span></a>
     <a class="is-medium is-primary button" href="/checkout"><span>Proceed to checkout</span><span class="icon"> <i class="fa fa-arrow-right"></i></span></a>
     </div>
