@@ -73,7 +73,7 @@
                 let formData = new FormData();
                 formData.append('id', product_id);
 
-                axios.post('/cart/add/', formData, config)
+                axios.post('/cart/add', formData, config)
                     .then(function (response) {
                         window.location.href="/cart"
                     })
